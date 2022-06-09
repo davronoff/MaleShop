@@ -1,4 +1,5 @@
-﻿using MaleShop.Domains;
+﻿using MaleShop.Data;
+using MaleShop.Domains;
 using MaleShop.Repositories.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,37 @@ namespace MaleShop.Repositories.Repos
 {
     public class BrandRepo : IBrandInterface
     {
+        private readonly ApplicationDbContext dbContext;
+
+        public BrandRepo(ApplicationDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
         public Task<Brand> AddBrand(Brand brand)
         {
-            throw new NotImplementedException();
+            dbContext.Brands.Add(brand);
+            dbContext.SaveChanges();
+            return Task.FromResult(brand);
         }
 
         public Task DeleteBrand(Guid brandId)
         {
-            throw new NotImplementedException();
+            var model = dbContext.Brands.FirstOrDefault(p => p.Id == brandId);
+            dbContext.Brands.Remove(model);
+            dbContext.SaveChanges();
+            return Task.CompletedTask;
         }
 
-        public Task<Brand> GetBrand(Guid brandId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Brand>> GetBrands()
-        {
-            throw new NotImplementedException();
-        }
+        public Task<Brand> GetBrand(Guid brandId) =>
+            Task.FromResult(dbContext.Brands.FirstOrDefault(p => p.Id == brandId));
+        public Task<List<Brand>> GetBrands() =>
+            Task.FromResult(dbContext.Brands.OrderBy(p => p.Name).ToList());
 
         public Task<Brand> UpdateBrand(Brand brand)
         {
-            throw new NotImplementedException();
+            dbContext.Brands.Update(brand);
+            dbContext.SaveChanges();
+            return Task.FromResult(brand);
         }
     }
 }
