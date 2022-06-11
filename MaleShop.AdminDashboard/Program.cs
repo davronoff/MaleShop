@@ -1,3 +1,4 @@
+using MaleShop.AdminDashboard.Services;
 using MaleShop.Data;
 using MaleShop.Repositories.Interface;
 using MaleShop.Repositories.Repos;
@@ -7,13 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("localdb")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")));
 
+// Repositories
 builder.Services.AddScoped<ICategoryInterface, CategoryRepo>();
 builder.Services.AddScoped<ISellingProductInterface,SellingProductRepo>();
 builder.Services.AddScoped<IBrandInterface, BrandRepo>();
+builder.Services.AddScoped<IImageControllerInterface, ImageControllerService>();
 
 var app = builder.Build();
 

@@ -1,2 +1,58 @@
 ﻿@{
 }
+@inject ICategoryInterface categoryinterface
+@inject IBrandInterface brandinterface
+
+@model AddSellingProductViewModel
+
+<div class="box-header position-relative table-header mt-2">
+    <div class="d-flex justify-content-between mt-3 com-header">
+        <h3>Add new Product</h3>
+    </div>
+</div>
+<form class="mx-4" asp-controller="sellingproduct" asp-action="add" enctype="multipart/form-data" method="post">
+    <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" type="text" class="form-control" id="title" placeholder="Add Name">
+    </div>
+    <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+        <label asp-for="Size">Size</label>
+        <input asp-for="Size" type="text" class="form-control" id="title" placeholder="Add Size">
+    </div>
+    <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+        <label asp-for="Color">Color</label>
+        <input asp-for="Color" type="text" class="form-control" id="title" placeholder="Add Color">
+    </div>
+    <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+        <label asp-for="Price">Price</label>
+        <input asp-for="Price" type="number" class="form-control" id="title" placeholder="Add Price">
+    </div>
+    <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+        <div class="input-group mx-4">
+            <input type="file" asp-for="Image" accept="image/*" class="form-control" id="inputGroupFile02">
+        </div>
+    </div>
+    <select asp-for="CategoryId" class="form-select mx-4" asp-for="CategoryId"  style="padding: 10px; font-size: 18px;" aria-label="Default select example">
+        <option selected disabled>--Select category--</option>
+        @foreach (var item in await categoryinterface.GetCategories())
+        {  
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+    <br />
+    <select asp-for="BrandId" class="form-select mx-4" asp-for="BrandId"  style="padding: 10px; font-size: 18px;" aria-label="Default select example">
+        <option selected disabled>--Select brand--</option>
+        @foreach (var item in await brandinterface.GetBrands())
+        {  
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+    <div class="button-group text-center my-5">
+        <button type="submit" class="btn btn-success me-5" style=" width:200px; " >
+            Save
+        </button>
+        <a asp-controller="sellingproduct" asp-action="index">
+            <span class="btn btn-info"  style=" width:200px;"> Cancel</span>
+        </a>
+    </div>
+</form>
