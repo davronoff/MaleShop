@@ -8,10 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddTransient<ICategoryInterface, CategoryRepo>();
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("localdb")));
+
+builder.Services.AddScoped<ICategoryInterface, CategoryRepo>();
+builder.Services.AddScoped<ISellingProductInterface,SellingProductRepo>();
+builder.Services.AddScoped<IBrandInterface, BrandRepo>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

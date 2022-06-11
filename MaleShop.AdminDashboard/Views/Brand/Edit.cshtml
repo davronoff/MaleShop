@@ -1,2 +1,27 @@
 ﻿@{
 }
+@{
+}
+@model EditBrandViewModel
+
+<div class="box-header position-relative table-header mt-5">
+    <div class="d-flex justify-content-between mt-3 com-header">
+        <h3>Edit Category</h3>
+    </div>
+</div>
+<form class="mx-4" asp-controller="brand" asp-action="edit" method="post" >
+    <input type="hidden" asp-for="Id" value="@Model.Id"/>
+    <div class="form-group" style="font-size: 18px;">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" value="@Model.Name" autocomplete="off" type="text" class="form-control" id="title" placeholder="Brand Name">
+    </div>
+    @*Save, Cancel Button*@
+    <div class="button-group text-center">
+        <button type="submit" class="btn btn-success me-5" style=" width:200px; " >
+            Save
+        </button>
+        <a asp-controller="brand" asp-action="index">
+            <span class="btn btn-info"  style=" width:200px;">Cancel</span>
+        </a>
+    </div>
+</form>

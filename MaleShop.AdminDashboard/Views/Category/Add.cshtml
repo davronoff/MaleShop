@@ -3,12 +3,12 @@
 @model Category
 <div class="box-header position-relative table-header mt-5">
     <div class="d-flex justify-content-between mt-3 com-header">
-        <h3>Yangi kategoriya qo'shish</h3>
+        <h3>Add new Category</h3>
     </div>
 </div>
 <form class="mx-4" asp-controller="category" asp-action="add" method="post" >
     <div class="form-group" style="font-size: 18px;">
-        <label asp-for="Name">Nomi</label>
+        <label asp-for="Name">Name</label>
         <input asp-for="Name" autocomplete="off" type="text" class="form-control" id="title" placeholder="Category Name">
     </div>
     <div class="button-group text-center">

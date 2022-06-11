@@ -1,2 +1,23 @@
 ﻿@{
 }
+@model Brand
+<div class="box-header position-relative table-header mt-5">
+    <div class="d-flex justify-content-between mt-3 com-header">
+        <h3>Add new Brand</h3>
+    </div>
+</div>
+<form class="mx-4" asp-controller="brand" asp-action="add" method="post" >
+    <div class="form-group" style="font-size: 18px;">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" autocomplete="off" type="text" class="form-control" id="title" placeholder="Brand Name">
+    </div>
+    <div class="button-group text-center">
+        <button type="submit" class="btn btn-success me-5" style=" width:200px; " >
+            Saqlash
+        </button>
+        @*Save, Cancel Button*@
+        <a asp-controller="brand" asp-action="index">
+            <span class="btn btn-info"  style=" width:200px;">Cancel</span>
+        </a>
+    </div>
+</form>
