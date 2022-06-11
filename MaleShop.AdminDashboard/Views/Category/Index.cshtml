@@ -1,0 +1,39 @@
+﻿@{
+}
+@model List<Category>
+<div class="row blok mt-5">
+    <div class="col-xs-11">
+        <div class="box data-table">
+            <div class="box-header position-relative table-header mt-2">
+                <div class="d-flex justify-content-between mt-3 mx-4 com-header">
+                    <h3>Categories</h3>
+                    <a asp-controller="category" asp-action="add">
+                        <span class="btn btn-success"><i class="las la-plus"></i>Add New</span>
+                    </a>
+                </div>
+            </div>
+            <div class="jadval box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Categories Name</th>
+                        <th style="text-align:center;">Action</th>
+                    </tr>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                        <td>@item.Name</td>
+                        <td class="cell">
+                            <a asp-controller="category" asp-action="edit" asp-route-id="@item.Id">
+                                <span class="btn btn-success">Edit</span>
+                            </a>
+                                <a asp-controller="category" asp-action="delete" asp-route-id="@item.Id"
+                                onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete
+                            </a>   
+                        </td>
+                    </tr>   
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
