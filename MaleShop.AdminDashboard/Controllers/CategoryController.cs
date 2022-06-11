@@ -17,12 +17,6 @@ namespace MaleShop.AdminDashboard.Controllers
         public async Task<IActionResult> Index()
         {
             var ListOfCategory = await categoryInterface.GetCategories();
-
-            if(ListOfCategory is null)
-            {
-                return View();
-            }
-
             return View(ListOfCategory);
         }
 
@@ -58,9 +52,9 @@ namespace MaleShop.AdminDashboard.Controllers
             return RedirectToAction("index");
         }
         [HttpGet]
-        public async Task<IActionResult> Delete(Guid categoryId)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            await categoryInterface.DeleteCategory(categoryId);
+            await categoryInterface.DeleteCategory(id);
             return RedirectToAction("index");
         }
     }

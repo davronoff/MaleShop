@@ -28,8 +28,7 @@ namespace MaleShop.Repositories.Repos
         //Delete Category
         public Task DeleteCategory(Guid categoryId)
         {
-            var model =  dbContext.Categories.FirstOrDefault(p => p.Id == categoryId);
-            dbContext.Categories.Remove(model);
+            dbContext.Categories.Remove(dbContext.Categories.FirstOrDefault(p => p.Id == categoryId));
             dbContext.SaveChanges();
             return Task.CompletedTask;
         }
