@@ -12,16 +12,19 @@ namespace MaleShop.AdminDashboard.Controllers
         private readonly IBrandInterface brandInterface;
         private readonly ISellingProductInterface sellingProduct;
         private readonly IImageControllerInterface imageController;
+        private readonly IWebHostEnvironment webHost;
 
         public SellingProductController(ICategoryInterface categoryInterface,
                               IBrandInterface brandInterface,
                               ISellingProductInterface sellingProduct,
-                              IImageControllerInterface imageController)
+                              IImageControllerInterface imageController,
+                              IWebHostEnvironment webHost)
         {
             this.categoryInterface = categoryInterface;
             this.brandInterface = brandInterface;
             this.sellingProduct = sellingProduct;
             this.imageController = imageController;
+            this.webHost = webHost;
         }
 
         [HttpGet]
@@ -38,7 +41,7 @@ namespace MaleShop.AdminDashboard.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
             return View();
         }
@@ -59,6 +62,19 @@ namespace MaleShop.AdminDashboard.Controllers
                 CategoryId = viewModel.CategoryId
             };
             await sellingProduct.AddSellingProduct(sellingProduct1);
+            return RedirectToAction("index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var item = await sellingProduct.GetSellingProduct(id);
+            string img = Path.Combine(webHost.WebRootPath, "photos", item.Image);
+            FileInfo info = new FileInfo(img);
+            if(info != null)
+            {
+                System.IO.File.Delete(img);
+            }
+            await sellingProduct.DeleteSellingProduct(id);
             return RedirectToAction("index");
         }
     }
