@@ -28,11 +28,12 @@
         <input asp-for="Price" type="number" class="form-control" id="title" placeholder="Add Price">
     </div>
     <div class="form-group mx-4" style="padding: 10px; font-size: 18px;">
+        <label asp-for="Image">Image</label>
         <div class="input-group mx-4">
             <input type="file" asp-for="Image" accept="image/*" class="form-control" id="inputGroupFile02">
         </div>
     </div>
-    <select asp-for="CategoryId" class="form-select mx-4" asp-for="CategoryId"  style="padding: 10px; font-size: 18px;" aria-label="Default select example">
+    <select asp-for="CategoryId" class="form-select mx-4" asp-for="CategoryId"  style="padding: 10px; font-size: 15px;" aria-label="Default select example">
         <option selected disabled>--Select category--</option>
         @foreach (var item in await categoryinterface.GetCategories())
         {  

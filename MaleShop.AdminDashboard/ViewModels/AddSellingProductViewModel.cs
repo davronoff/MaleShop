@@ -4,7 +4,7 @@ namespace MaleShop.AdminDashboard.ViewModels
 {
     public class AddSellingProductViewModel
     {
-         public string? Name { get; set; }
+        public string? Name { get; set; }
         public string? Size { get; set; }
         public string? Color { get; set; }
         public double Price { get; set; }

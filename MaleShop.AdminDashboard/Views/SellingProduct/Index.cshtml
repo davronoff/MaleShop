@@ -21,6 +21,7 @@
                             <th>Color</th>
                             <th>Price</th>
                             <th>Iamge</th>
+                            <th>Creat Time</th>
                             <th>Brand</th>
                             <th>Category</th>
                             <th style="text-align:center;">Action</th>
@@ -33,6 +34,12 @@
                             <td>@item.Color</td>
                             <td>@item.Price $</td>
                             <td><img  src="@item.Image" asp-append-version="true" style="width: 50px;"/></td>
+                            <td>
+                                @{
+                                    string txt = item.CreatedTime.ToString().Substring(0, 10);
+                                }
+                                @txt
+                            </td>
                             <td>@Model.Brands.FirstOrDefault(p => p.Id == item.BrandId).Name</td>
                             <td>@Model.Categories.FirstOrDefault(x => x.Id == item.CategoryId).Name</td>                        
                             <td class="cell">

@@ -64,6 +64,14 @@ namespace MaleShop.AdminDashboard.Controllers
             await sellingProduct.AddSellingProduct(sellingProduct1);
             return RedirectToAction("index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var item = await sellingProduct.GetSellingProduct(id);
+            return View((EditSellingProductViewModel)item);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
