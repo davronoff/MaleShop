@@ -1,2 +1,60 @@
 ﻿@{
 }
+@model EditSellingProductViewModel
+@inject ICategoryInterface cate
+<div class="box-header position-relative table-header mt-5">
+    <div class="d-flex justify-content-between mt-3 com-header">
+        <h3>Edit Product</h3>
+    </div>
+</div>
+<form class="mx-4" asp-controller="sellingproduct" asp-action="edit" method="post" >
+    <input type="hidden" asp-for="Id" value="@Model.Id"/>
+    <div class="form-group" style="font-size: 18px;">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" value="@Model.Name" autocomplete="off" type="text" class="form-control" id="title" placeholder="Product Name">
+    </div>
+    <div class="form-group" style="font-size: 18px;">
+        <label asp-for="Size">Size</label>
+        <input asp-for="Size" value="@Model.Size" autocomplete="off" type="text" class="form-control" id="title" placeholder="Product Size">
+    </div>
+    <div class="form-group" style="font-size: 18px;">
+        <label asp-for="Color">Color</label>
+        <input asp-for="Color" value="@Model.Color" autocomplete="off" type="text" class="form-control" id="title" placeholder="Product Color">
+    </div>
+    <div class="form-group" style="font-size: 18px;">
+        <label asp-for="Price">Price</label>
+        <input asp-for="Price" value="@Model.Price $" autocomplete="off" type="text" class="form-control" id="title" placeholder="Product Price">
+    </div>
+
+    <input type="hidden" asp-for="CreatedTime" value="@Model.CreatedTime"/>
+    <input type="hidden" asp-for="Image" value="@Model.Image"/>
+
+    <div class="form-group" style="font-size: 18px;">
+        <label asp-for="NewImage">New image for Product</label>
+        <div class="input-group mx-4">
+            <input value="@Model.NewImage" type="file" asp-for="NewImage" accept="image/*" class="form-control" id="inputGroupFile02">
+        </div>
+    </div>
+    <div class="form-group" style="font-size: 18px;">
+        <label asp-for="BrandId">Brand</label>
+        <input asp-for="BrandId" value="@Model.BrandId" autocomplete="off" type="text" class="form-control" id="title" placeholder="Product Brand">
+    </div>
+    <div class="form-group" style="font-size: 18px;">
+        <label asp-for="CategoryId">Category</label>
+        @{
+            var item = await cate.GetCategories();
+            string name = item.FirstOrDefault(p => p.Id == Model.CategoryId).Name; 
+         }
+         <h3> Product Category: @name</h3>
+        <input asp-for="CategoryId" value="@Model.CategoryId" autocomplete="off" type="text" class="form-control" id="title" placeholder="Product Category">
+    </div>
+    @*Save, Cancel Button*@
+    <div class="button-group text-center">
+        <button type="submit" class="btn btn-success me-5" style=" width:200px; " >
+            Save
+        </button>
+        <a asp-controller="sellingproduct" asp-action="index">
+            <span class="btn btn-info"  style=" width:200px;">Cancel</span>
+        </a>
+    </div>
+</form>
