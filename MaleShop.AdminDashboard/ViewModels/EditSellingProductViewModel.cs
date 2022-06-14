@@ -5,7 +5,6 @@ namespace MaleShop.AdminDashboard.ViewModels
 {
     public class EditSellingProductViewModel
     {
-        [Required, Key]
         public Guid Id { get; set; }
         public string? Name { get; set; }
         public string? Size { get; set; }
@@ -17,7 +16,7 @@ namespace MaleShop.AdminDashboard.ViewModels
         public Guid CategoryId { get; set; }
         public IFormFile? NewImage { get; set; }
 
-        public static explicit operator EditSellingProductViewModel(SellingProduct? m)
+        public static explicit operator EditSellingProductViewModel(SellingProduct m)
         {
             return new EditSellingProductViewModel()
             {
@@ -30,6 +29,21 @@ namespace MaleShop.AdminDashboard.ViewModels
                 CreatedTime = m.CreatedTime,
                 BrandId = m.BrandId,
                 CategoryId = m.CategoryId,
+            };
+        }
+        public static explicit operator SellingProduct(EditSellingProductViewModel v)
+        {
+            return new SellingProduct()
+            {
+                Id = v.Id,
+                Name = v.Name,
+                Size = v.Size,
+                Color = v.Color,
+                Price = v.Price,
+                Image = v.Image,
+                CreatedTime = v.CreatedTime,
+                BrandId = v.BrandId,
+                CategoryId = v.CategoryId
             };
         }
     }

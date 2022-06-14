@@ -1,4 +1,6 @@
 using MaleShop.Data;
+using MaleShop.Repositories.Interface;
+using MaleShop.Repositories.Repos;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")));
+
+builder.Services.AddScoped<ICategoryInterface, CategoryRepo>();
+builder.Services.AddScoped<ISellingProductInterface, SellingProductRepo>();
+builder.Services.AddScoped<IBrandInterface, BrandRepo>();
 
 var app = builder.Build();
 

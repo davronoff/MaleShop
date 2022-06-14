@@ -34,6 +34,12 @@ namespace MaleShop.Repositories.Repos
 
         public Task<Brand> GetBrand(Guid brandId) =>
             Task.FromResult(dbContext.Brands.FirstOrDefault(p => p.Id == brandId));
+
+        public Task<List<Brand>> GetBrandBySPBrandId(Guid brandId)
+        {
+            return Task.FromResult(dbContext.Brands.Where(p => p.Id == brandId).ToList());
+        }
+
         public Task<List<Brand>> GetBrands() =>
             Task.FromResult(dbContext.Brands.OrderBy(p => p.Name).ToList());
 

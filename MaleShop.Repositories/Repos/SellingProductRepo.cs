@@ -41,7 +41,9 @@ namespace MaleShop.Repositories.Repos
 
         public Task<SellingProduct> UpdateSellingProduct(SellingProduct sellingProduct)
         {
-            throw new NotImplementedException();
+            dbContext.SellingProducts.Update(sellingProduct);
+            dbContext.SaveChanges();
+            return Task.FromResult(sellingProduct);
         }
     }
 }

@@ -14,5 +14,6 @@ namespace MaleShop.Repositories.Interface
         Task<Brand> AddBrand(Brand brand);
         Task<Brand> UpdateBrand(Brand brand);
         Task DeleteBrand(Guid brandId);
+        Task<List<Brand>> GetBrandBySPBrandId(Guid brandId);
     }
 }

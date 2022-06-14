@@ -15,13 +15,16 @@
         <label asp-for="Name">Name</label>
         <input asp-for="Name" value="@Model.Name" autocomplete="off" type="text" class="form-control" id="title" placeholder="Brand Name">
     </div>
+    <br />
     @*Save, Cancel Button*@
     <div class="button-group text-center">
         <button type="submit" class="btn btn-success me-5" style=" width:200px; " >
             Save
         </button>
         <a asp-controller="brand" asp-action="index">
-            <span class="btn btn-info"  style=" width:200px;">Cancel</span>
+            <span class="btn btn-info"  style=" width:200px;">
+                Cancel
+            </span>
         </a>
     </div>
 </form>

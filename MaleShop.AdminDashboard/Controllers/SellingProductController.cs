@@ -72,15 +72,34 @@ namespace MaleShop.AdminDashboard.Controllers
             return View((EditSellingProductViewModel)item);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditSellingProductViewModel v)
+        {
+            if (v.NewImage is not null)
+            {
+                string img = Path.Combine(webHost.WebRootPath, "photos", v.Image);
+                FileInfo info = new FileInfo(img);
+                if (info != null)
+                {
+                    System.IO.File.Delete(img);
+                }
+                imageController.SaveImage(v.NewImage);
+            }
+
+            await sellingProduct.UpdateSellingProduct((SellingProduct)v);
+            return RedirectToAction("index");
+        }
+
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
             var item = await sellingProduct.GetSellingProduct(id);
             string img = Path.Combine(webHost.WebRootPath, "photos", item.Image);
             FileInfo info = new FileInfo(img);
-            if(info != null)
+            if (info != null)
             {
                 System.IO.File.Delete(img);
+               
             }
             await sellingProduct.DeleteSellingProduct(id);
             return RedirectToAction("index");
