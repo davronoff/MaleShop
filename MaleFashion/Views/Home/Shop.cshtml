@@ -2,7 +2,7 @@
 @{
 
 }
-@model List<SellingProduct>
+@model ShopViewModel
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
         <div class="container">
@@ -43,15 +43,12 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__categories">
                                                 <ul class="nice-scroll">
-                                                    <li><a href="#">Men (20)</a></li>
-                                                    <li><a href="#">Women (20)</a></li>
-                                                    <li><a href="#">Bags (20)</a></li>
-                                                    <li><a href="#">Clothing (20)</a></li>
-                                                    <li><a href="#">Shoes (20)</a></li>
-                                                    <li><a href="#">Accessories (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
+                                                    @{
+                                                        @foreach(var item2 in @Model.Categories)
+                                                    {
+                                                        <li><a href="#">@item2.Name</a></li>
+                                                    }
+                                                }
                                                 </ul>
                                             </div>
                                         </div>
@@ -65,10 +62,12 @@
                                         <div class="card-body">
                                             <div class="shop__sidebar__brand">
                                                 <ul>
-                                                    <li><a href="#">Louis Vuitton</a></li>
-                                                    <li><a href="#">Chanel</a></li>
-                                                    <li><a href="#">Hermes</a></li>
-                                                    <li><a href="#">Gucci</a></li>
+                                                    @{
+                                                            @foreach(var item1 in @Model.Brands)
+                                                    {
+                                                            <li><a asp-controller="" asp-action="">@item1.Name</a></li>
+                                                    }
+                                                }
                                                 </ul>
                                             </div>
                                         </div>
@@ -210,44 +209,44 @@
                     </div>
                     <div class="row">
                         @{
-                            @foreach(var item in Model)
+                                @foreach(var item in Model.SellingProducts)
                         {
-                            <div class="col-lg-4 col-md-6 col-sm-6"> 
-                                <div class="product__item">
-                                    <div class="product__item__pic" >
-                                        <img class="product__item__pic" asp-append-version="true" src="@item.Image" />
-                                        <ul class="product__hover">
-                                            <li><a href="#"><img asp-append-version="true" src="~/img/icon/heart.png" alt=""></a></li>
-                                            <li><a href="#"><img asp-append-version="true" src="~/img/icon/compare.png" alt=""> <span>Compare</span></a>
-                                            </li>
-                                            <li><a href="#"><img asp-append-version="true" src="~/img/icon/search.png" alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <h6>@item.Name</h6>
-                                        <a href="#" class="add-cart">+ Add To Cart</a>
-                                        <div class="rating">
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
+                                <div class="col-lg-4 col-md-6 col-sm-6"> 
+                                    <div class="product__item">
+                                        <div class="product__item__pic" >
+                                            <img class="product__item__pic" asp-append-version="true" src="~/photos/@item.Image" />
+                                            <ul class="product__hover">
+                                                <li><a href="#"><img asp-append-version="true" src="~/img/icon/heart.png" alt=""></a></li>
+                                                <li><a href="#"><img asp-append-version="true" src="~/img/icon/compare.png" alt=""> <span>Compare</span></a>
+                                                </li>
+                                                <li><a href="#"><img asp-append-version="true" src="~/img/icon/search.png" alt=""></a></li>
+                                            </ul>
                                         </div>
-                                        <h5>$@item.Price</h5>
-                                        <div class="product__color__select">
-                                            <label for="pc-4">
-                                                <input type="radio" id="pc-4">
-                                            </label>
-                                            <label class="active black" for="pc-5">
-                                                <input type="radio" id="pc-5">
-                                            </label>
-                                            <label class="grey" for="pc-6">
-                                                <input type="radio" id="pc-6">
-                                            </label>
+                                        <div class="product__item__text">
+                                            <h6>@item.Name</h6>
+                                            <a href="#" class="add-cart">+ Add To Cart</a>
+                                            <div class="rating">
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                            <h5>$@item.Price</h5>
+                                            <div class="product__color__select">
+                                                <label for="pc-4">
+                                                    <input type="radio" id="pc-4">
+                                                </label>
+                                                <label class="active black" for="pc-5">
+                                                    <input type="radio" id="pc-5">
+                                                </label>
+                                                <label class="grey" for="pc-6">
+                                                    <input type="radio" id="pc-6">
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         }
                     }
                         <@*div class="col-lg-4 col-md-6 col-sm-6">
