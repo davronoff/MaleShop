@@ -19,9 +19,13 @@ namespace MaleFashion.Controllers
             this.brandInterface = brandInterface;
             this.sellingProduct = sellingProduct;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IndexViewModel viewModel = new()
+            {
+                SelLingProduucts = await sellingProduct.GetSellingProducts()
+            };
+            return View(viewModel);
         }
         public IActionResult About()
         {
