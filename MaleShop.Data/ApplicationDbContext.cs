@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MaleShop.Data
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext : DbContext
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -15,5 +15,6 @@ namespace MaleShop.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<SellingProduct> SellingProducts { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<SiteIndexCollactions> SiteIndexCollactions { get; set; } 
     }
 }
